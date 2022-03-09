@@ -67,7 +67,12 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
+  if (document.getElementById('duration').value < 1000) {
+    alert('Please Input Integer greater  than 1000');
+    return;
+  }
   const duration = document.getElementById('duration').value || 1000;
+  
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
@@ -81,6 +86,7 @@ const createSlider = () => {
     slideIndex++;
     changeSlide(slideIndex);
   }, duration);
+  
 }
 
 // change slider index 
@@ -114,6 +120,8 @@ searchBtn.addEventListener('click', function () {
   clearInterval(timer);
   const search = document.getElementById('search');
   getImages(search.value)
+  search.value = ''
+  document.getElementById('duration').value = ''
   sliders.length = 0;
 })
 
